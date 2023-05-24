@@ -100,3 +100,131 @@ def agenda():      #Este programa sirve para agregar,modificar,eliminar y consul
 			time.sleep(3)
 			os.system("cls")
 agenda()
+
+
+#SUGERENCIA Y CORRECCIONES: 
+
+
+import time  
+import os
+
+def agenda():
+    # Este programa sirve para agregar, modificar, eliminar y consultar contactos de una agenda
+    contactos = {}
+    salir = True
+
+    while salir:
+        print('Bienvenido a Mi Agenda\n')
+        print(' 1.) Ver Contactos\n 2.) Agregar Contacto\n 3.) Buscar Contacto\n 4.) Modificar Contacto\n 5.) Eliminar Contacto\n 6.) Salir\n')
+        opcion = input('Ingrese opción: ')
+        os.system("cls")
+
+        if opcion == '1': # Muestra los contactos
+            if contactos.__len__ <0:
+                 print('No existen contactos aún')
+                 time.sleep(2)
+                 
+            else:
+                print('Contacto / Numero')
+                for contacto, numero in contactos.items():
+                    print(contacto, numero)
+                    time.sleep(3)
+                
+            os.system("cls")
+
+        elif opcion == '2': # Registra los contactos
+            nombre = input('Nombre: ')
+            if nombre.lower() in contactos:
+                print('Error: el contacto ya existe')
+                time.sleep(3)
+                os.system("cls")
+                continue
+
+            try:
+                numero = int(input('Número: '))
+                if numero > 9999999999:
+                    print('El número es demasiado largo')
+                    time.sleep(3)
+                    os.system("cls")
+                    continue
+                elif numero < 1000000000:
+                    print('El número es demasiado corto. Deben ser 10 dígitos')
+                    time.sleep(2)
+                    os.system("cls")
+                    continue
+            except:
+                print('Valor no válido')
+                time.sleep(3)
+                os.system("cls")
+
+            contactos[nombre.lower()] = numero
+            print('Contacto agregado')
+            print(contactos)
+            time.sleep(3)
+            os.system("cls")
+
+        elif opcion == '3': # Buscar Contacto
+            buscar = input('Contacto a buscar: ')
+            buscar = buscar.lower()
+            if buscar not in contactos:
+                print('El contacto no existe. Agréguelo desde el menú')
+                continue
+
+            print('Contacto:', buscar, 'Número:', contactos[buscar])
+            time.sleep(3)
+            os.system("cls")
+
+        elif opcion == '4': # Modificar contacto
+            contacto = input('Contacto a modificar: ')
+            contacto = contacto.lower()
+            if contacto not in contactos:
+                print('El contacto no existe. Agréguelo desde el menú')
+                continue
+
+            try:
+                nuevo = int(input('Nuevo Número: '))
+                contactos[contacto] = nuevo
+                if nuevo > 9999999999:
+                    print('El número es demasiado largo')
+                    time.sleep(3)
+                    os.system("cls")
+                    continue
+                elif nuevo < 1000000000:
+                    print('El número es demasiado corto. Deben ser 10 dígitos')
+                    time.sleep(3)
+                    os.system("cls")
+                    continue
+
+                print('Contacto modificado con éxito')
+                time.sleep(3)
+                os.system("cls")
+
+            except:
+                print('Dato no válido')
+                time.sleep(3)
+                os.system("cls")
+                continue
+
+        elif opcion == '5':
+            eliminar = input('Contacto a eliminar: ')
+            eliminar = eliminar.lower()
+            if eliminar not in contactos:
+                print("El contacto no existe")
+                continue
+
+            del contactos[eliminar]
+            print('Contacto', eliminar, 'eliminado con éxito')
+            time.sleep(4)
+            os.system("cls")
+            continue
+
+        elif opcion == '6': # Regresar al menú principal
+            print("Programa terminado...")
+            break
+
+        else:
+            print('Opción no válida. Elija una opción del 1 al 6')
+            time.sleep(3)
+            os.system("cls")
+
+agenda()
