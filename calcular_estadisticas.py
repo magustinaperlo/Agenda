@@ -21,3 +21,7 @@ resultados = {
 for operacion, resultado in resultados.items ():
     print (f"{operacion}: {resultado}")        
            
+        
+        
+  #excelente
+        
